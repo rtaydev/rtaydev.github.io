@@ -57,8 +57,29 @@
         <div class="post-list">
           
             <div id="search-container">
-  <input type="text" id="search-input" placeholder="Search...">
-  <ul id="results-container"></ul>
+    
+      <article>
+        <h2><a href="/tech/flutter/macos/2024/09/15/creating-tech-test-assistant-for-neurodivergents.html">Creating a Tech Test Assistant Flutter App for macOS Desktop</a></h2>
+        <p>Discover how to create a Flutter app for macOS that assists neurodivergent individuals during tech interviews by leveraging Google Vision for OCR and OpenAI for natural language processing.</p>
+        <p class="meta">
+          <span>September 15, 2024</span>
+          <span><i class="fas fa-circle" style="font-size: 0.2em; color: gray;"></i></span>
+          <span>Russ Taylor</span>
+          <span class="categories">
+            
+              <a href="/categories/tech">tech</a>
+               <span style="color: lightgray; vertical-align: middle;">&middot;</span> 
+            
+              <a href="/categories/flutter">flutter</a>
+               <span style="color: lightgray; vertical-align: middle;">&middot;</span> 
+            
+              <a href="/categories/macos">macos</a>
+              
+            
+          </span>
+        </p>
+      </article>
+    
 </div>
 
 <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
@@ -84,7 +105,12 @@ SimpleJekyllSearch({
 </div>
 <script>
     async function fetchGitHubProfile() {
-      const response = await fetch('https://api.github.com/users/rtaydev');
+      const token = '{{ secrets.GITHUB_TOKEN }}' // Replace with your actual token
+      const response = await fetch('https://api.github.com/users/rtaydev', {
+          headers: {
+              'Authorization': `token ${token}`
+          }
+      });
       const profile = await response.json();
       const profileContainer = document.getElementById('github-profile');
       profileContainer.innerHTML = `

@@ -67,19 +67,16 @@
                   <span>September 15, 2024</span>
                   <span><i class="fas fa-circle" style="font-size: 0.2em; color: gray;"></i></span>
                   <span>Russ Taylor</span>
-                  <span class="tags">
+                  <span class="categories">
                     
-                      <a href="/tags/neurodivergence">neurodivergence</a>, 
+                      <a href="/categories/tech">tech</a>
+                       <span style="color: lightgray; vertical-align: middle;">&middot;</span> 
                     
-                      <a href="/tags/tech interviews">tech interviews</a>, 
+                      <a href="/categories/flutter">flutter</a>
+                       <span style="color: lightgray; vertical-align: middle;">&middot;</span> 
                     
-                      <a href="/tags/Flutter">Flutter</a>, 
-                    
-                      <a href="/tags/macOS">macOS</a>, 
-                    
-                      <a href="/tags/Google Vision">Google Vision</a>, 
-                    
-                      <a href="/tags/OpenAI">OpenAI</a>
+                      <a href="/categories/macos">macos</a>
+                      
                     
                   </span>
                 </p>
@@ -95,13 +92,7 @@
 <p class="about-text">The mission is to raise awareness, provide resources, and offer support for neurodivergent individuals, especially developers, to help them access assessments, find a community, and to offer advice on professional support. In the future, I hope to be able to offer financial support to those who need it, through a network of sponsors. However, this lofty dream is still in the planning stages.</p>
 <p class="about-text">As a neurodivergent developer myself, I have faced many challenges in my career, and I want to help others avoid the same pitfalls. I have been fortunate to have a supportive family and a great therapist, but I know that not everyone has access to the same resources. I want to be able to provide that support to others, so that they can succeed in their careers and live fulfilling lives.</p>
         </section>
-        <section class="tags">
-          <h3>Tags</h3>
-          <ul>
-            
-            
-          </ul>
-        </section>
+        
       </aside>
       
     </main>
@@ -110,7 +101,12 @@
 </div>
 <script>
     async function fetchGitHubProfile() {
-      const response = await fetch('https://api.github.com/users/rtaydev');
+      const token = '{{ secrets.GITHUB_TOKEN }}' // Replace with your actual token
+      const response = await fetch('https://api.github.com/users/rtaydev', {
+          headers: {
+              'Authorization': `token ${token}`
+          }
+      });
       const profile = await response.json();
       const profileContainer = document.getElementById('github-profile');
       profileContainer.innerHTML = `

@@ -64,19 +64,16 @@
   <p class="meta">
     <span>September 15, 2024</span>
     <span>Russ Taylor</span>
-    <span class="tags">
+    <span class="categories">
       
-        <a href="/tags/neurodivergence">neurodivergence</a>, 
+        <a href="/categories/tech">tech</a>
+         <span style="color: lightgray; vertical-align: middle;">&middot;</span> 
       
-        <a href="/tags/tech interviews">tech interviews</a>, 
+        <a href="/categories/flutter">flutter</a>
+         <span style="color: lightgray; vertical-align: middle;">&middot;</span> 
       
-        <a href="/tags/Flutter">Flutter</a>, 
-      
-        <a href="/tags/macOS">macOS</a>, 
-      
-        <a href="/tags/Google Vision">Google Vision</a>, 
-      
-        <a href="/tags/OpenAI">OpenAI</a>
+        <a href="/categories/macos">macos</a>
+        
       
     </span>
   </p>
@@ -499,7 +496,12 @@ Neurodivergent individuals often experience “freezing” during interviews—w
 </div>
 <script>
     async function fetchGitHubProfile() {
-      const response = await fetch('https://api.github.com/users/rtaydev');
+      const token = '{{ secrets.GITHUB_TOKEN }}' // Replace with your actual token
+      const response = await fetch('https://api.github.com/users/rtaydev', {
+          headers: {
+              'Authorization': `token ${token}`
+          }
+      });
       const profile = await response.json();
       const profileContainer = document.getElementById('github-profile');
       profileContainer.innerHTML = `
