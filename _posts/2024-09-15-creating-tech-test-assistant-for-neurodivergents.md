@@ -34,7 +34,7 @@ Preparation and using tools that reduce cognitive strain are essential strategie
 
 If you're using this tool during a real tech interview because you are neurodivergent, it's always a good idea to inform the interviewer. Mention that you're using a tool to help manage the cognitive load during the interview, and request any reasonable accommodations you may need. Alternatively, this app is also an excellent way to practice coding challenges before an interview, helping you stay focused and organized.
 
-The source code for this tool is available on GitHub: [GitHub Repository](https://github.com/your-repo/neuro-test-assistant).
+The source code for this tool is available on GitHub: [GitHub Repository](https://github.com/rtaydev/nd-tech-assistant).
 
 ---
 
