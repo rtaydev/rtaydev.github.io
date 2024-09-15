@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<article class="post">
+  {% if page.image %}
+    <img src="{{ page.image }}" alt="{{ page.title }} image" style="width: 100%; height: auto;">
+  {% endif %}
+  <h1>{{ page.title }}</h1>
+  <p class="meta">
+    <span>{{ page.date | date: "%B %d, %Y" }}</span>
+    <span>{{ page.author }}</span>
+    <span class="tags">
+      {% for tag in page.tags %}
+        <a href="{{ site.baseurl }}/tags/{{ tag }}">{{ tag }}</a>{% if forloop.last == false %}, {% endif %}
+      {% endfor %}
+    </span>
+  </p>
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>

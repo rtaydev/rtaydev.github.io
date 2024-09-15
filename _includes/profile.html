@@ -1,0 +1,23 @@
+<div id="github-profile">
+        <p>Loading profile...</p>
+</div>
+<script>
+    async function fetchGitHubProfile() {
+      const response = await fetch('https://api.github.com/users/rtaydev');
+      const profile = await response.json();
+      const profileContainer = document.getElementById('github-profile');
+      profileContainer.innerHTML = `
+        <article>
+            <img src="${profile.avatar_url}" alt="${profile.login}'s avatar" width="100" style="border-radius: 50%;">
+            <h2>${profile.name}</h2>
+            <p>${profile.bio}</p>
+            <p>Organization: ${profile.company}</p>
+            <p>Location: ${profile.location}</p>
+            <p>Public Repos: ${profile.public_repos}</p>
+            <a href="${profile.html_url}" target="_blank">View on GitHub</a>
+        </article>
+      `;
+    }
+
+    fetchGitHubProfile();
+  </script>
