@@ -2,8 +2,7 @@
 layout: post
 title: "Creating a Tech Test Assistant Flutter App for macOS Desktop"
 date: 2024-09-15
-categories: [Tech, Flutter, macOS]
-tags: ["neurodivergence", "tech interviews", "Flutter", "macOS", "Google Vision", "OpenAI"]
+categories: tech flutter macos
 excerpt: "Discover how to create a Flutter app for macOS that assists neurodivergent individuals during tech interviews by leveraging Google Vision for OCR and OpenAI for natural language processing."
 author: "Russ Taylor"
 image: /assets/gifs/nd-tech-assist.gif

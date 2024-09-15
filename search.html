@@ -1,11 +1,27 @@
 ---
 layout: default
 title: Search
+permalink: /search
 ---
 
 <div id="search-container">
-  <input type="text" id="search-input" placeholder="Search...">
-  <ul id="results-container"></ul>
+    {% for post in site.posts %}
+      <article>
+        <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        <p>{{ post.excerpt }}</p>
+        <p class="meta">
+          <span>{{ post.date | date: "%B %d, %Y" }}</span>
+          <span><i class="fas fa-circle" style="font-size: 0.2em; color: gray;"></i></span>
+          <span>{{ post.author }}</span>
+          <span class="categories">
+            {% for category in post.categories %}
+              <a href="{{ site.baseurl }}/categories/{{ category }}">{{ category }}</a>
+              {% if forloop.last == false %} <span style="color: lightgray; vertical-align: middle;">&middot;</span> {% endif %}
+            {% endfor %}
+          </span>
+        </p>
+      </article>
+    {% endfor %}
 </div>
 
 <script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>

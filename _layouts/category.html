@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<div class="post-list">
+  {% for post in site.posts %}
+    {% if post.categories contains page.category %}
+    <article>
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      <p>{{ post.excerpt }}</p>
+      <p class="meta">
+        <span>{{ post.date | date: "%B %d, %Y" }}</span>
+        <span><i class="fas fa-circle" style="font-size: 0.2em; color: gray;"></i></span>
+        <span>{{ post.author }}</span>
+        <span class="categories">
+          {% for category in post.categories %}
+            <a href="{{ site.baseurl }}/categories/{{ category }}">{{ category }}</a>
+            {% if forloop.last == false %} <span style="color: lightgray; vertical-align: middle;">&middot;</span> {% endif %}
+          {% endfor %}
+        </span>
+      </p>
+    </article>
+    {% endif %}
+  {% endfor %}
+  </div>

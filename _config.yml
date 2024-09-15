@@ -27,6 +27,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://rtaydev.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: rtaydev
+github_token: "{{ secrets.GITHUB_TOKEN }}"
 
 lsi: false
 safe: true
@@ -39,17 +40,18 @@ kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
 
-collections:
-  tags:
-    output: true
-    permalink: /tags/:name/
-
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
   - github-pages
   - jekyll-seo-tag
+  - jekyll-categories
+
+collections:
+  categories:
+    output: true
+    permalink: /:categories/:name
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
