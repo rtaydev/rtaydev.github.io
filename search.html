@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - The Neuro Disruptive</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.9.0/simple-jekyll-search.min.js"></script>
+    
+  </head>
+  <body>
+    <header class="header">
+  <div class="logo">
+    <a href="http://rtaydev.github.io">
+      <img src="/assets/svgs/nd-logo.svg" alt="The Neuro Disruptive Logo">
+    </a>
+  </div>
+  <div class="header-nav">
+    <nav class="navigation">
+        <a href="/">Home</a>
+    </nav>
+    <div class="search">
+        <form action="/search.html" method="get">
+          <input type="text" name="query" id="search-input" placeholder="Search...">
+          <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+  </div>
+</header>
+<script>
+  document.getElementById('search-button').addEventListener('click', function(event) {
+    const searchDiv = document.querySelector('.search');
+    const searchInput = document.getElementById('search-input');
+    if (!searchDiv.classList.contains('expanded')) {
+      event.preventDefault(); // Prevent form submission
+      searchDiv.classList.toggle('expanded');
+      searchInput.focus(); // Focus on the input when expanded
+    }
+  });
+
+  document.getElementById('search-input').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      const searchDiv = document.querySelector('.search');
+      if (!searchDiv.classList.contains('expanded')) {
+        event.preventDefault(); // Prevent form submission
+        searchDiv.classList.toggle('expanded');
+        this.focus(); // Focus on the input when expanded
+      }
+    }
+  });
+</script>
+
+    <main>
+      <div class="main-column">
+        <div class="post-list">
+          
+            <div id="search-container">
+  <input type="text" id="search-input" placeholder="Search...">
+  <ul id="results-container"></ul>
+</div>
+
+<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+<script>
+SimpleJekyllSearch({
+  searchInput: document.getElementById('search-input'),
+  resultsContainer: document.getElementById('results-container'),
+  json: '/search.json',
+  searchResultTemplate: '<li><a href="{url}">{title}</a><p>{excerpt}</p></li>',
+  noResultsText: 'No results found',
+  limit: 10,
+  fuzzy: false
+});
+</script>
+
+          
+        </div>
+      </div>
+      
+    </main>
+    <div id="github-profile">
+        <p>Loading profile...</p>
+</div>
+<script>
+    async function fetchGitHubProfile() {
+      const response = await fetch('https://api.github.com/users/rtaydev');
+      const profile = await response.json();
+      const profileContainer = document.getElementById('github-profile');
+      profileContainer.innerHTML = `
+        <article>
+            <img src="${profile.avatar_url}" alt="${profile.login}'s avatar" width="100" style="border-radius: 50%;">
+            <h2>${profile.name}</h2>
+            <p>${profile.bio}</p>
+            <p>Organization: ${profile.company}</p>
+            <p>Location: ${profile.location}</p>
+            <p>Public Repos: ${profile.public_repos}</p>
+            <a href="${profile.html_url}" target="_blank">View on GitHub</a>
+        </article>
+      `;
+    }
+
+    fetchGitHubProfile();
+  </script>
+    <footer class="footer">
+    <nav>
+        <a href="/">Home</a>
+    </nav>
+    <span>&copy; 2024 The Neuro Disruptive</span>
+</footer>
+
+  </body>
+</html>

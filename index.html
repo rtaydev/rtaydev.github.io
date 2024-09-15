@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the NeuroDisruptive Blog! - The Neuro Disruptive</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.9.0/simple-jekyll-search.min.js"></script>
+    
+  </head>
+  <body>
+    <header class="header">
+  <div class="logo">
+    <a href="http://rtaydev.github.io">
+      <img src="/assets/svgs/nd-logo.svg" alt="The Neuro Disruptive Logo">
+    </a>
+  </div>
+  <div class="header-nav">
+    <nav class="navigation">
+        <a href="/">Home</a>
+    </nav>
+    <div class="search">
+        <form action="/search.html" method="get">
+          <input type="text" name="query" id="search-input" placeholder="Search...">
+          <button type="submit" id="search-button"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+  </div>
+</header>
+<script>
+  document.getElementById('search-button').addEventListener('click', function(event) {
+    const searchDiv = document.querySelector('.search');
+    const searchInput = document.getElementById('search-input');
+    if (!searchDiv.classList.contains('expanded')) {
+      event.preventDefault(); // Prevent form submission
+      searchDiv.classList.toggle('expanded');
+      searchInput.focus(); // Focus on the input when expanded
+    }
+  });
+
+  document.getElementById('search-input').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      const searchDiv = document.querySelector('.search');
+      if (!searchDiv.classList.contains('expanded')) {
+        event.preventDefault(); // Prevent form submission
+        searchDiv.classList.toggle('expanded');
+        this.focus(); // Focus on the input when expanded
+      }
+    }
+  });
+</script>
+
+    <main>
+      <div class="main-column">
+        <div class="post-list">
+          
+            
+              <article>
+                <h2><a href="/tech/flutter/macos/2024/09/15/creating-tech-test-assistant-for-neurodivergents.html">Creating a Tech Test Assistant Flutter App for macOS Desktop</a></h2>
+                
+                  <img src="/assets/gifs/nd-tech-assist.gif" alt="Creating a Tech Test Assistant Flutter App for macOS Desktop" style="width: 100%; height: auto;">
+                
+                <p>Discover how to create a Flutter app for macOS that assists neurodivergent individuals during tech interviews by leveraging Google Vision for OCR and OpenAI for natural language processing.</p>
+                <p class="meta">
+                  <span>September 15, 2024</span>
+                  <span><i class="fas fa-circle" style="font-size: 0.2em; color: gray;"></i></span>
+                  <span>Russ Taylor</span>
+                  <span class="tags">
+                    
+                      <a href="/tags/neurodivergence">neurodivergence</a>, 
+                    
+                      <a href="/tags/tech interviews">tech interviews</a>, 
+                    
+                      <a href="/tags/Flutter">Flutter</a>, 
+                    
+                      <a href="/tags/macOS">macOS</a>, 
+                    
+                      <a href="/tags/Google Vision">Google Vision</a>, 
+                    
+                      <a href="/tags/OpenAI">OpenAI</a>
+                    
+                  </span>
+                </p>
+              </article>
+            
+          
+        </div>
+      </div>
+      
+      <aside class="sidebar">
+        <section class="about">
+          <h3>About</h3>
+<p class="about-text">The mission is to raise awareness, provide resources, and offer support for neurodivergent individuals, especially developers, to help them access assessments, find a community, and to offer advice on professional support. In the future, I hope to be able to offer financial support to those who need it, through a network of sponsors. However, this lofty dream is still in the planning stages.</p>
+<p class="about-text">As a neurodivergent developer myself, I have faced many challenges in my career, and I want to help others avoid the same pitfalls. I have been fortunate to have a supportive family and a great therapist, but I know that not everyone has access to the same resources. I want to be able to provide that support to others, so that they can succeed in their careers and live fulfilling lives.</p>
+        </section>
+        <section class="tags">
+          <h3>Tags</h3>
+          <ul>
+            
+            
+          </ul>
+        </section>
+      </aside>
+      
+    </main>
+    <div id="github-profile">
+        <p>Loading profile...</p>
+</div>
+<script>
+    async function fetchGitHubProfile() {
+      const response = await fetch('https://api.github.com/users/rtaydev');
+      const profile = await response.json();
+      const profileContainer = document.getElementById('github-profile');
+      profileContainer.innerHTML = `
+        <article>
+            <img src="${profile.avatar_url}" alt="${profile.login}'s avatar" width="100" style="border-radius: 50%;">
+            <h2>${profile.name}</h2>
+            <p>${profile.bio}</p>
+            <p>Organization: ${profile.company}</p>
+            <p>Location: ${profile.location}</p>
+            <p>Public Repos: ${profile.public_repos}</p>
+            <a href="${profile.html_url}" target="_blank">View on GitHub</a>
+        </article>
+      `;
+    }
+
+    fetchGitHubProfile();
+  </script>
+    <footer class="footer">
+    <nav>
+        <a href="/">Home</a>
+    </nav>
+    <span>&copy; 2024 The Neuro Disruptive</span>
+</footer>
+
+  </body>
+</html>

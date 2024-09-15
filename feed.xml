@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://rtaydev.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="http://rtaydev.github.io/" rel="alternate" type="text/html" /><updated>2024-09-15T14:19:02+00:00</updated><id>http://rtaydev.github.io/feed.xml</id><title type="html">The Neuro Disruptive</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Creating a Tech Test Assistant Flutter App for macOS Desktop</title><link href="http://rtaydev.github.io/tech/flutter/macos/2024/09/15/creating-tech-test-assistant-for-neurodivergents.html" rel="alternate" type="text/html" title="Creating a Tech Test Assistant Flutter App for macOS Desktop" /><published>2024-09-15T00:00:00+00:00</published><updated>2024-09-15T00:00:00+00:00</updated><id>http://rtaydev.github.io/tech/flutter/macos/2024/09/15/creating-tech-test-assistant-for-neurodivergents</id><content type="html" xml:base="http://rtaydev.github.io/tech/flutter/macos/2024/09/15/creating-tech-test-assistant-for-neurodivergents.html"><![CDATA[<h2 id="introduction">Introduction</h2>
+
+<p>Tech interviews are stressful for many developers, but for neurodivergent individuals, the artificial and high-pressure environment of a tech test can be overwhelming. Neurodivergence, which includes ADHD, autism, and dyslexia, often comes with difficulties in handling stress, processing information quickly, and maintaining focus. In an interview setting, these challenges can cause candidates to freeze or hyper-focus on the interviewer, ultimately impacting their performance in ways that do not reflect their technical abilities.</p>
+
+<p>Interviews, especially tech tests, are often designed in a way that simulates “real” coding environments but are far from genuine. The combination of time limits, being observed, and solving unfamiliar problems can trigger intense anxiety for neurodivergent individuals, making it harder to showcase their true skills.</p>
+
+<h3 id="challenges-in-tech-interviews">Challenges in Tech Interviews</h3>
+
+<p>Freezing or Hyper-Focusing on the Interviewer
+Neurodivergent individuals often experience “freezing” during interviews—where their mind goes blank, and they can’t proceed with the task, no matter how simple. This can happen when they focus too much on the interviewer instead of the problem at hand. The constant awareness of being observed can make it difficult to enter a “flow” state, a critical element of productive coding.</p>
+
+<h3 id="anxiety-and-emulated-situations">Anxiety and Emulated Situations</h3>
+
+<p>Interviews are artificial by nature, and for neurodivergent individuals, they often heighten stress rather than simulate a real-world coding environment. Many struggle to adapt to the contrived conditions of tech tests, especially when interviewers expect immediate solutions without giving time for reflection.</p>
+
+<h3 id="overcoming-interview-anxiety">Overcoming Interview Anxiety</h3>
+
+<p>Preparation and using tools that reduce cognitive strain are essential strategies for neurodivergent candidates. By building tools that help automate or offload some of the mental load (e.g., quickly parsing problem statements or suggesting code patterns), candidates can focus more on their technical strengths and worry less about performance anxiety.</p>
+
+<hr />
+
+<h3 id="disclaimer-when-and-how-to-use-this-tool">Disclaimer: When and How to Use This Tool</h3>
+
+<p>If you’re using this tool during a real tech interview because you are neurodivergent, it’s always a good idea to inform the interviewer. Mention that you’re using a tool to help manage the cognitive load during the interview, and request any reasonable accommodations you may need. Alternatively, this app is also an excellent way to practice coding challenges before an interview, helping you stay focused and organized.</p>
+
+<p>The source code for this tool is available on GitHub: <a href="https://github.com/rtaydev/nd-tech-assistant">GitHub Repository</a>.</p>
+
+<hr />
+
+<h2 id="creating-a-tech-test-assistant-flutter-app-for-macos-desktop">Creating a Tech Test Assistant Flutter App for macOS Desktop</h2>
+
+<p>This app will assist you during tech tests by utilizing Google Vision for OCR (Optical Character Recognition) and OpenAI for natural language processing to provide helpful responses based on captured text.</p>
+
+<h3 id="step-1-set-up-your-environment">Step 1: Set Up Your Environment</h3>
+
+<ol>
+  <li><strong>Install Flutter</strong>: Follow the <a href="https://flutter.dev/docs/get-started/install">official Flutter installation guide</a>.</li>
+  <li>
+    <p><strong>Enable macOS Desktop Support</strong>:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter config <span class="nt">--enable-macos-desktop</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="step-2-creating-a-new-flutter-project">Step 2: Creating a New Flutter Project</h3>
+
+<ol>
+  <li>
+    <p><strong>Create a New Project</strong>:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>flutter create nd_test_assistant
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Navigate to the Project Directory</strong>:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>nd_test_assistant
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="step-3-adding-dependencies">Step 3: Adding Dependencies</h3>
+
+<p>In your <code class="language-plaintext highlighter-rouge">pubspec.yaml</code>, add the necessary dependencies for API communication and logging:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">dependencies</span><span class="pi">:</span>
+<span class="na">flutter</span><span class="pi">:</span>
+    <span class="na">sdk</span><span class="pi">:</span> <span class="s">flutter</span>
+<span class="na">logger</span><span class="pi">:</span> <span class="s">^1.3.0</span>
+<span class="na">google_vision</span><span class="pi">:</span> <span class="s">^2.0.0</span>
+<span class="na">flutter_dotenv</span><span class="pi">:</span> <span class="s">^5.0.2</span>
+</code></pre></div></div>
+
+<p>These dependencies serve specific purposes in the app. The <code class="language-plaintext highlighter-rouge">logger</code> package is used for logging and debugging messages, which is crucial when handling external API responses and internal state changes. The <code class="language-plaintext highlighter-rouge">google_vision</code> package allows us to perform OCR by communicating with Google’s Vision API, and <code class="language-plaintext highlighter-rouge">flutter_dotenv</code> is used to load API keys from a <code class="language-plaintext highlighter-rouge">.env</code> file for security purposes.</p>
+
+<h3 id="step-4-setting-up-google-cloud-and-openai-apis">Step 4: Setting Up Google Cloud and OpenAI APIs</h3>
+
+<h4 id="google-cloud-vision-api">Google Cloud Vision API</h4>
+
+<ol>
+  <li>Go to the <a href="https://console.cloud.google.com/">Google Cloud Console</a>.</li>
+  <li>Create a new project and enable the <strong>Vision API</strong>.</li>
+  <li>Generate an <strong>API Key</strong> under “Credentials”.</li>
+  <li>
+    <p>Store the API key in an <code class="language-plaintext highlighter-rouge">.env</code> file:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">GOOGLE_API_KEY</span><span class="o">=</span>your_google_api_key
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="openai-api">OpenAI API</h4>
+
+<ol>
+  <li>Sign up for <a href="https://beta.openai.com/signup/">OpenAI</a>.</li>
+  <li>Generate an <strong>API Key</strong> under the API section.</li>
+  <li>
+    <p>Store the key in the <code class="language-plaintext highlighter-rouge">.env</code> file:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>your_openai_api_key
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Make sure the <code class="language-plaintext highlighter-rouge">.env</code> file is loaded in <code class="language-plaintext highlighter-rouge">pubspec.yaml</code>:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">assets</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">.env</span>
+</code></pre></div></div>
+
+<h3 id="step-5-flutter-code-overview">Step 5: Flutter Code Overview</h3>
+
+<p>The core functionality of this app relies on two services: one for performing OCR via Google Vision, and the other for generating responses from OpenAI based on the extracted text. Let’s break down each part.</p>
+
+<h4 id="main-entry-point-maindart">Main Entry Point (<code class="language-plaintext highlighter-rouge">main.dart</code>)</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">main.dart</code> file is the entry point for our Flutter app. It initializes the application by loading the necessary environment variables and setting up the user interface.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="s">'package:flutter/material.dart'</span><span class="o">;</span>
+<span class="kn">import</span> <span class="s">'package:flutter_dotenv/flutter_dotenv.dart'</span><span class="o">;</span>
+<span class="kn">import</span> <span class="s">'package:logger/logger.dart'</span><span class="o">;</span>
+<span class="kn">import</span> <span class="s">'package:nd_test_assistant/screens/home_screen.dart'</span><span class="o">;</span>
+
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="kd">async</span> <span class="p">{</span>
+  <span class="n">WidgetsFlutterBinding</span><span class="o">.</span><span class="na">ensureInitialized</span><span class="p">();</span>
+  <span class="k">await</span> <span class="n">dotenv</span><span class="o">.</span><span class="na">load</span><span class="p">(</span><span class="nl">fileName:</span> <span class="s">".env"</span><span class="p">);</span>
+
+  <span class="n">runApp</span><span class="p">(</span><span class="n">MainApp</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">MainApp</span> <span class="kd">extends</span> <span class="n">StatelessWidget</span> <span class="p">{</span>
+  <span class="n">MainApp</span><span class="p">({</span><span class="k">super</span><span class="o">.</span><span class="na">key</span><span class="p">});</span>
+  <span class="kd">final</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">();</span>
+
+  <span class="nd">@override</span>
+  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">MaterialApp</span><span class="p">(</span>
+      <span class="nl">home:</span> <span class="n">HomeScreen</span><span class="p">(),</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This code initializes the <code class="language-plaintext highlighter-rouge">dotenv</code> package to load environment variables from the <code class="language-plaintext highlighter-rouge">.env</code> file, ensuring that the sensitive API keys are not hardcoded into the app. The <code class="language-plaintext highlighter-rouge">MainApp</code> widget is a stateless widget that returns the primary UI, which is the <code class="language-plaintext highlighter-rouge">HomeScreen</code>. The <code class="language-plaintext highlighter-rouge">Logger</code> object is initialized here, allowing us to log important information for debugging purposes throughout the app.</p>
+
+<h4 id="ocr-service-ocr_servicedart">OCR Service (<code class="language-plaintext highlighter-rouge">ocr_service.dart</code>)</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">OcrService</code> class is responsible for interacting with the Google Vision API. This service reads an image file, sends it to Google Vision for processing, and returns any text detected in the image.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="s">'package:google_vision/google_vision.dart'</span><span class="o">;</span>
+<span class="kn">import</span> <span class="s">'package:logger/logger.dart'</span><span class="o">;</span>
+<span class="kn">import</span> <span class="s">'dart:io'</span><span class="o">;</span>
+<span class="kn">import</span> <span class="s">'package:flutter_dotenv/flutter_dotenv.dart'</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">OcrService</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="kd">final</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">Logger</span><span class="p">(</span>
+    <span class="nl">printer:</span> <span class="n">PrettyPrinter</span><span class="p">(),</span>
+  <span class="p">);</span>
+
+  <span class="n">Future</span><span class="p">&lt;</span><span class="kt">String</span><span class="o">?</span><span class="p">&gt;</span> <span class="n">performOcrAndLog</span><span class="p">(</span><span class="kt">String</span> <span class="n">imagePath</span><span class="p">)</span> <span class="kd">async</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">final</span> <span class="n">apiKey</span> <span class="o">=</span> <span class="n">dotenv</span><span class="o">.</span><span class="na">get</span><span class="p">(</span><span class="s">'GOOGLE_API_KEY'</span><span class="p">);</span>
+      <span class="kd">final</span> <span class="n">googleVision</span> <span class="o">=</span> <span class="n">GoogleVision</span><span class="p">()</span><span class="o">.</span><span class="na">withApiKey</span><span class="p">(</span><span class="n">apiKey</span><span class="p">);</span>
+      <span class="n">logger</span><span class="o">.</span><span class="na">i</span><span class="p">(</span><span class="s">'Performing OCR on image...'</span><span class="p">);</span>
+
+      <span class="kd">final</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">await</span> <span class="n">File</span><span class="p">(</span><span class="n">imagePath</span><span class="p">)</span><span class="o">.</span><span class="na">readAsBytes</span><span class="p">();</span>
+      <span class="kd">final</span> <span class="n">byteBuffer</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="na">buffer</span><span class="p">;</span>
+
+      <span class="kt">List</span><span class="p">&lt;</span><span class="n">EntityAnnotation</span><span class="p">&gt;</span> <span class="n">ocrResponse</span> <span class="o">=</span> <span class="k">await</span> <span class="n">googleVision</span><span class="o">.</span><span class="na">image</span>
+          <span class="o">.</span><span class="na">textDetection</span><span class="p">(</span><span class="n">JsonImage</span><span class="o">.</span><span class="na">fromBuffer</span><span class="p">(</span><span class="n">byteBuffer</span><span class="p">));</span>
+
+      <span class="kd">final</span> <span class="n">textAnnotations</span> <span class="o">=</span> <span class="n">ocrResponse</span><span class="o">.</span><span class="na">map</span><span class="p">((</span><span class="n">e</span><span class="p">)</span> <span class="o">=</span><span class="p">&gt;</span> <span class="n">e</span><span class="o">.</span><span class="na">description</span><span class="p">)</span><span class="o">.</span><span class="na">firstWhere</span><span class="p">(</span>
+          <span class="p">(</span><span class="n">description</span><span class="p">)</span> <span class="o">=</span><span class="p">&gt;</span> <span class="n">description</span><span class="o">.</span><span class="na">isNotEmpty</span><span class="p">,</span>
+          <span class="nl">orElse:</span> <span class="p">()</span> <span class="o">=</span><span class="p">&gt;</span> <span class="s">''</span><span class="p">);</span>
+
+      <span class="n">logger</span><span class="o">.</span><span class="na">i</span><span class="p">(</span><span class="s">'Extracted text: </span><span class="se">\\</span><span class="s">n</span><span class="si">$textAnnotations</span><span class="s">'</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">textAnnotations</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">logger</span><span class="o">.</span><span class="na">e</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This service begins by loading the Google Vision API key from the environment variables using <code class="language-plaintext highlighter-rouge">dotenv.get('GOOGLE_API_KEY')</code>. It then uses the <code class="language-plaintext highlighter-rouge">GoogleVision</code> instance to perform OCR on an image. The <code class="language-plaintext highlighter-rouge">performOcrAndLog</code> method first reads the image file from the specified <code class="language-plaintext highlighter-rouge">imagePath</code>, converting it into bytes that can be processed by the API.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">textDetection</code> method returns a list of <code class="language-plaintext highlighter-rouge">EntityAnnotation</code> objects, which contain the detected text from the image. The code maps through the list and returns the first non-empty <code class="language-plaintext highlighter-rouge">description</code>, which represents the recognized text. This process is logged using the <code class="language-plaintext highlighter-rouge">Logger</code> for debugging.</p>
+
+<h4 id="openai-service-openai_servicedart">OpenAI Service (<code class="language-plaintext highlighter-rouge">openai_service.dart</code>)</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">OpenaiService</code> class is responsible for sending the extracted text to OpenAI and receiving a response, which can be used to assist the developer during tech tests.</p>
+
+<div class="language-dart highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="s">'dart:convert'</span><span class="o">;</span>
+<span class="kn">import</span> <span class="s">'package:flutter_dotenv/flutter_dotenv.dart'</span><span class="o">;</span>
+<span class="kn">import</span> <span class="s">'package:http/http.dart'</span> <span class="k">as</span> <span class="n">http</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">OpenaiService</span> <span class="p">{</span>
+  <span class="kd">final</span> <span class="kt">String</span> <span class="n">apiKey</span> <span class="o">=</span> <span class="n">dotenv</span><span class="o">.</span><span class="na">get</span><span class="p">(</span><span class="s">'OPENAI_API_KEY'</span><span class="p">);</span>
+  <span class="kd">final</span> <span class="kt">String</span> <span class="n">apiUrl</span> <span class="o">=</span> <span class="s">"https://api.openai.com/v1/chat/completions"</span><span class="p">;</span>
+
+  <span class="n">OpenaiService</span><span class="p">();</span>
+
+  <span class="n">Stream</span><span class="p">&lt;</span><span class="kt">String</span><span class="p">&gt;</span> <span class="n">sendMessageStream</span><span class="p">(</span><span class="kt">String</span> <span class="n">message</span><span class="p">)</span> <span class="kd">async</span><span class="o">*</span> <span class="p">{</span>
+    <span class="kd">final</span> <span class="n">request</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="na">Request</span><span class="p">(</span><span class="s">'POST'</span><span class="p">,</span> <span class="kt">Uri</span><span class="o">.</span><span class="na">parse</span><span class="p">(</span><span class="n">apiUrl</span><span class="p">));</span>
+    <span class="n">request</span><span class="o">.</span><span class="na">headers</span><span class="o">.</span><span class="na">addAll</span><span class="p">({</span>
+      <span class="s">'Content-Type'</span><span class="o">:</span> <span class="s">'application/json'</span><span class="p">,</span>
+      <span class="s">'Authorization'</span><span class="o">:</span> <span class="s">'Bearer </span><span class="si">$apiKey</span><span class="s">'</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="n">request</span><span class="o">.</span><span class="na">body</span> <span class="o">=</span> <span class="n">jsonEncode</span><span class="p">({</span>
+      <span class="s">"model"</span><span class="o">:</span> <span class="s">"gpt-4"</span><span class="p">,</span>
+      <span class="s">"messages"</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="s">"role"</span><span class="o">:</span> <span class="s">"system"</span><span class="p">,</span>
+          <span class="s">"content"</span><span class="o">:</span> <span class="s">"You are a senior mobile and web app engineer specializing in React and React Native..."</span>
+        <span class="p">},</span>
+        <span class="p">{</span><span class="s">"role"</span><span class="o">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="o">:</span> <span class="n">message</span><span class="p">}</span>
+      <span class="p">],</span>
+      <span class="s">"max_tokens"</span><span class="o">:</span> <span class="mi">1500</span><span class="p">,</span>
+      <span class="s">"temperature"</span><span class="o">:</span> <span class="mf">0.7</span><span class="p">,</span>
+      <span class="s">"stream"</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="kd">final</span> <span class="n">httpClient</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="na">Client</span><span class="p">();</span>
+    <span class="kd">final</span> <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">httpClient</span><span class="o">.</span><span class="na">send</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+
+    <span class="kd">final</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">stream</span><span class="o">.</span><span class="na">transform</span><span class="p">(</span><span class="n">utf8</span><span class="o">.</span><span class="na">decoder</span><span class="p">)</span><span class="o">.</span><span class="na">transform</span><span class="p">(</span><span class="kd">const</span> <span class="n">LineSplitter</span><span class="p">());</span>
+
+    <span class="k">await</span> <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="n">line</span> <span class="k">in</span> <span class="n">stream</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="na">startsWith</span><span class="p">(</span><span class="s">'data: '</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kd">final</span> <span class="n">jsonData</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="na">substring</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="na">trim</span><span class="p">()</span> <span class="o">==</span> <span class="s">'[DONE]'</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">jsonData</span><span class="o">.</span><span class="na">isNotEmpty</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">final</span> <span class="n">decodedJson</span> <span class="o">=</span> <span class="n">jsonDecode</span><span class="p">(</span><span class="n">jsonData</span><span class="p">);</span>
+          <span class="kd">final</span> <span class="n">deltaContent</span> <span class="o">=</span> <span class="n">decodedJson</span><span class="p">[</span><span class="s">'choices'</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">'delta'</span><span class="p">][</span><span class="s">'content'</span><span class="p">];</span>
+          <span class="k">if</span> <span class="p">(</span><span class="n">deltaContent</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">yield</span> <span class="n">deltaContent</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In this service, we interact with the OpenAI API by sending a POST request to the <code class="language-plaintext highlighter-rouge">/chat/completions</code> endpoint. This service takes the extracted text (from the OCR service) as input and sends it to OpenAI, which processes it using the GPT-4 model. The <code class="language-plaintext highlighter-rouge">sendMessageStream</code> method enables streaming of the response, allowing the UI to display incremental results as OpenAI generates them.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">http.Request</code> object is created to make the API call. It includes the necessary headers for authentication, with the API key loaded from the environment variables. The request body contains the model type (GPT-4), the user prompt (extracted text), and parameters such as <code class="language-plaintext highlighter-rouge">max_tokens</code> and <code class="language-plaintext highlighter-rouge">temperature</code> to control the behavior of the AI response.</p>
+
+<p>This method leverages a <code class="language-plaintext highlighter-rouge">Stream</code> to yield the generated response in chunks as they are received, making the application more interactive by not waiting for the entire response to be generated before displaying results.</p>
+
+<hr />
+
+<h3 id="macos-swift-code">macOS Swift Code</h3>
+
+<p>In addition to the Flutter app, the macOS version of the tool requires native Swift code to handle platform-specific features, such as screenshot capture and window management. Let’s go over the key Swift code components used to manage these features.</p>
+
+<h4 id="appdelegateswift">AppDelegate.swift</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">AppDelegate.swift</code> file initializes the app and sets up the screenshot manager when the application launches.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Cocoa</span>
+<span class="kd">import</span> <span class="kt">FlutterMacOS</span>
+
+<span class="kd">@main</span>
+<span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">FlutterAppDelegate</span> <span class="p">{</span>
+
+  <span class="k">override</span> <span class="kd">func</span> <span class="nf">applicationShouldTerminateAfterLastWindowClosed</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">NSApplication</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span>
+  <span class="p">}</span>
+
+  <span class="k">override</span> <span class="kd">func</span> <span class="nf">applicationDidFinishLaunching</span><span class="p">(</span><span class="n">_</span> <span class="nv">notification</span><span class="p">:</span> <span class="kt">Notification</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">ScreenshotManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">setupScreenshotChannel</span><span class="p">(</span><span class="nv">mainFlutterWindow</span><span class="p">:</span> <span class="n">mainFlutterWindow</span><span class="p">)</span>
+    
+    <span class="c1">// Set the initial position and size of the window</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">window</span> <span class="o">=</span> <span class="n">mainFlutterWindow</span><span class="p">,</span> <span class="k">let</span> <span class="nv">screenSize</span> <span class="o">=</span> <span class="kt">NSScreen</span><span class="o">.</span><span class="n">main</span><span class="p">?</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span> <span class="p">{</span>
+      <span class="kt">WindowManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">setInitialWindowSizeAndPosition</span><span class="p">(</span><span class="nv">window</span><span class="p">:</span> <span class="n">window</span><span class="p">,</span> <span class="nv">screenSize</span><span class="p">:</span> <span class="n">screenSize</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This code serves as the entry point for the macOS-specific functionality. It sets up the <code class="language-plaintext highlighter-rouge">ScreenshotManager</code> and configures the main app window. The <code class="language-plaintext highlighter-rouge">applicationDidFinishLaunching</code> method is crucial because it initializes the platform channel used to communicate between Flutter and native macOS code, enabling functionality such as screenshots and window manipulation.</p>
+
+<h4 id="windowmanagerswift">WindowManager.swift</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">WindowManager</code> class manages the window sizing, positioning, and style for the macOS app.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Cocoa</span>
+<span class="kd">import</span> <span class="kt">FlutterMacOS</span>
+
+<span class="kd">class</span> <span class="kt">WindowManager</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span> <span class="o">=</span> <span class="kt">WindowManager</span><span class="p">()</span>
+
+  <span class="kd">private</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="kd">func</span> <span class="nf">setInitialWindowSizeAndPosition</span><span class="p">(</span><span class="nv">window</span><span class="p">:</span> <span class="kt">NSWindow</span><span class="p">?,</span> <span class="nv">screenSize</span><span class="p">:</span> <span class="kt">CGSize</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">windowSize</span> <span class="o">=</span> <span class="kt">CGSize</span><span class="p">(</span><span class="nv">width</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="k">let</span> <span class="nv">x</span> <span class="o">=</span> <span class="n">screenSize</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">windowSize</span><span class="o">.</span><span class="n">width</span>
+    <span class="k">let</span> <span class="nv">y</span> <span class="o">=</span> <span class="n">screenSize</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">windowSize</span><span class="o">.</span><span class="n">height</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="nf">setFrame</span><span class="p">(</span><span class="kt">NSRect</span><span class="p">(</span><span class="nv">x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="nv">y</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="nv">width</span><span class="p">:</span> <span class="n">windowSize</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="nv">height</span><span class="p">:</span> <span class="n">windowSize</span><span class="o">.</span><span class="n">height</span><span class="p">),</span> <span class="nv">display</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="n">styleMask</span><span class="o">.</span><span class="nf">insert</span><span class="p">([</span><span class="o">.</span><span class="n">resizable</span><span class="p">,</span> <span class="o">.</span><span class="n">titled</span><span class="p">])</span>
+  <span class="p">}</span>
+
+  <span class="kd">func</span> <span class="nf">configureMainWindow</span><span class="p">(</span><span class="nv">controller</span><span class="p">:</span> <span class="kt">FlutterViewController</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">window</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">window</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="kt">NSColor</span><span class="o">.</span><span class="n">clear</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="n">isOpaque</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="n">hasShadow</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="n">styleMask</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="o">.</span><span class="n">titled</span><span class="p">)</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="n">styleMask</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="o">.</span><span class="n">resizable</span><span class="p">)</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="n">styleMask</span><span class="o">.</span><span class="nf">remove</span><span class="p">(</span><span class="o">.</span><span class="n">closable</span><span class="p">)</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="n">ignoresMouseEvents</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="n">window</span><span class="p">?</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="o">.</span><span class="n">floating</span>
+  <span class="p">}</span>
+
+  <span class="kd">func</span> <span class="nf">setupOverlayWindow</span><span class="p">(</span><span class="nv">screenSize</span><span class="p">:</span> <span class="kt">CGRect</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">ScreenshotManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">overlayWindow</span> <span class="o">=</span> <span class="kt">NSWindow</span><span class="p">(</span><span class="nv">contentRect</span><span class="p">:</span> <span class="n">screenSize</span><span class="p">,</span>
+                                                      <span class="nv">styleMask</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">borderless</span><span class="p">],</span>
+                                                      <span class="nv">backing</span><span class="p">:</span> <span class="o">.</span><span class="n">buffered</span><span class="p">,</span>
+                                                      <span class="nv">defer</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
+    <span class="kt">ScreenshotManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">overlayWindow</span><span class="p">?</span><span class="o">.</span><span class="n">isOpaque</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="kt">ScreenshotManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">overlayWindow</span><span class="p">?</span><span class="o">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="kt">NSColor</span><span class="o">.</span><span class="n">clear</span>
+    <span class="kt">ScreenshotManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">overlayWindow</span><span class="p">?</span><span class="o">.</span><span class="n">ignoresMouseEvents</span> <span class="o">=</span> <span class="kc">false</span>
+    <span class="kt">ScreenshotManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">overlayWindow</span><span class="p">?</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="o">.</span><span class="n">screenSaver</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">WindowManager</code> class provides methods to configure the app’s window. It allows you to set the initial size and position of the window relative to the screen. It also sets up the overlay window, which is used during the screenshot selection process. This overlay is transparent, allowing users to visually select a region of the screen for capture.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">configureMainWindow</code> method ensures that the main Flutter window is properly set up, removing unnecessary features like the title bar and making the window floating, which ensures it stays on top of other windows.</p>
+
+<h4 id="screenshotmanagerswift">ScreenshotManager.swift</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">ScreenshotManager</code> class handles the logic for capturing screenshots, interacting with the macOS native screen capture APIs.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">import</span> <span class="kt">Cocoa</span>
+<span class="kd">import</span> <span class="kt">FlutterMacOS</span>
+<span class="kd">import</span> <span class="kt">ScreenCaptureKit</span>
+
+<span class="kd">class</span> <span class="kt">ScreenshotManager</span> <span class="p">{</span>
+  <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span> <span class="o">=</span> <span class="kt">ScreenshotManager</span><span class="p">()</span>
+  <span class="k">var</span> <span class="nv">overlayWindow</span><span class="p">:</span> <span class="kt">NSWindow</span><span class="p">?</span>
+
+  <span class="kd">private</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{}</span>
+
+  <span class="kd">func</span> <span class="nf">setupScreenshotChannel</span><span class="p">(</span><span class="nv">mainFlutterWindow</span><span class="p">:</span> <span class="kt">NSWindow</span><span class="p">?)</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">flutterViewController</span> <span class="o">=</span> <span class="kt">NSApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="nf">first</span><span class="p">(</span><span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">contentViewController</span> <span class="k">is</span> <span class="kt">FlutterViewController</span> <span class="p">})?</span><span class="o">.</span><span class="n">contentViewController</span> <span class="k">as?</span> <span class="kt">FlutterViewController</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span>
+    <span class="p">}</span>
+
+    <span class="kt">WindowManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">configureMainWindow</span><span class="p">(</span><span class="nv">controller</span><span class="p">:</span> <span class="n">flutterViewController</span><span class="p">)</span>
+    <span class="nf">setupMethodChannel</span><span class="p">(</span><span class="nv">controller</span><span class="p">:</span> <span class="n">flutterViewController</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">private</span> <span class="kd">func</span> <span class="nf">setupMethodChannel</span><span class="p">(</span><span class="nv">controller</span><span class="p">:</span> <span class="kt">FlutterViewController</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">screenshotChannel</span> <span class="o">=</span> <span class="kt">FlutterMethodChannel</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"com.ndtechassistant.screenshot"</span><span class="p">,</span> <span class="nv">binaryMessenger</span><span class="p">:</span> <span class="n">controller</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">binaryMessenger</span><span class="p">)</span>
+    <span class="n">screenshotChannel</span><span class="o">.</span><span class="n">setMethodCallHandler</span> <span class="p">{</span> <span class="p">[</span><span class="k">weak</span> <span class="k">self</span><span class="p">]</span> <span class="p">(</span><span class="nv">call</span><span class="p">:</span> <span class="kt">FlutterMethodCall</span><span class="p">,</span> <span class="nv">result</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">FlutterResult</span><span class="p">)</span> <span class="k">in</span>
+      <span class="k">guard</span> <span class="k">let</span> <span class="nv">self</span> <span class="o">=</span> <span class="k">self</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+      <span class="k">if</span> <span class="n">call</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">"drawRectAndCapture"</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">showOverlayWindow</span><span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="n">result</span><span class="p">)</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">result</span><span class="p">(</span><span class="kt">FlutterMethodNotImplemented</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">private</span> <span class="kd">func</span> <span class="nf">showOverlayWindow</span><span class="p">(</span><span class="nv">result</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">FlutterResult</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">screenSize</span> <span class="o">=</span> <span class="kt">NSScreen</span><span class="o">.</span><span class="n">main</span><span class="p">?</span><span class="o">.</span><span class="n">frame</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nf">result</span><span class="p">(</span><span class="kt">FlutterError</span><span class="p">(</span><span class="nv">code</span><span class="p">:</span> <span class="s">"UNAVAILABLE"</span><span class="p">,</span> <span class="nv">message</span><span class="p">:</span> <span class="s">"Screen size unavailable"</span><span class="p">,</span> <span class="nv">details</span><span class="p">:</span> <span class="kc">nil</span><span class="p">))</span>
+      <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="kt">WindowManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">setupOverlayWindow</span><span class="p">(</span><span class="nv">screenSize</span><span class="p">:</span> <span class="n">screenSize</span><span class="p">)</span>
+    
+    <span class="k">let</span> <span class="nv">view</span> <span class="o">=</span> <span class="kt">CaptureView</span><span class="p">(</span><span class="nv">frame</span><span class="p">:</span> <span class="n">screenSize</span><span class="p">,</span> <span class="nv">result</span><span class="p">:</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">overlayWindow</span><span class="p">?</span><span class="o">.</span><span class="n">contentView</span> <span class="o">=</span> <span class="n">view</span>
+    <span class="n">overlayWindow</span><span class="p">?</span><span class="o">.</span><span class="nf">makeKeyAndOrderFront</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">mainFlutterWindow</span> <span class="o">=</span> <span class="kt">NSApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="nf">first</span><span class="p">(</span><span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">contentViewController</span> <span class="k">is</span> <span class="kt">FlutterViewController</span> <span class="p">})?</span><span class="o">.</span><span class="n">contentViewController</span><span class="p">?</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">window</span> <span class="p">{</span>
+      <span class="n">mainFlutterWindow</span><span class="o">.</span><span class="nf">orderOut</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="kt">NSApp</span><span class="o">.</span><span class="nf">activate</span><span class="p">(</span><span class="nv">ignoringOtherApps</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+    
+    <span class="n">view</span><span class="o">.</span><span class="n">onCaptureComplete</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="k">let</span> <span class="nv">mainFlutterWindow</span> <span class="o">=</span> <span class="kt">NSApplication</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">windows</span><span class="o">.</span><span class="nf">first</span><span class="p">(</span><span class="nv">where</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">contentViewController</span> <span class="k">is</span> <span class="kt">FlutterViewController</span> <span class="p">})?</span><span class="o">.</span><span class="n">contentViewController</span><span class="p">?</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">window</span> <span class="p">{</span>
+        <span class="n">mainFlutterWindow</span><span class="o">.</span><span class="nf">makeKeyAndOrderFront</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+      <span class="p">}</span>
+      <span class="k">self</span><span class="o">.</span><span class="n">overlayWindow</span><span class="p">?</span><span class="o">.</span><span class="nf">orderOut</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">ScreenshotManager</code> uses macOS’s native <code class="language-plaintext highlighter-rouge">ScreenCaptureKit</code> to capture screenshots. It first creates an overlay window that lets users select a portion of the screen. Once the selection is made, the screenshot is captured and returned to the Flutter app. This class also sets up the communication channel between Flutter and macOS through a <code class="language-plaintext highlighter-rouge">FlutterMethodChannel</code>, allowing Flutter to trigger screenshot functionality.</p>
+
+<h3 id="github-repository">GitHub Repository</h3>
+
+<p>The full source code for this project is available on GitHub: <a href="https://github.com/rtaydev/nd-tech-assistant">GitHub Repository</a>.</p>]]></content><author><name>Russ Taylor</name></author><category term="Tech" /><category term="Flutter" /><category term="macOS" /><category term="neurodivergence" /><category term="tech interviews" /><category term="Flutter" /><category term="macOS" /><category term="Google Vision" /><category term="OpenAI" /><summary type="html"><![CDATA[Discover how to create a Flutter app for macOS that assists neurodivergent individuals during tech interviews by leveraging Google Vision for OCR and OpenAI for natural language processing.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://rtaydev.github.io/assets/gifs/nd-tech-assist.gif" /><media:content medium="image" url="http://rtaydev.github.io/assets/gifs/nd-tech-assist.gif" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
