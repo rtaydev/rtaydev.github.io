@@ -10,6 +10,16 @@ body {
   font-size: 16px;
 }
 
+a {
+  color: #333;
+  font-weight: 400;
+  filter: none;
+}
+
+a:hover {
+  color: #000;
+}
+
 .header, .footer {
   background-color: #fff;
   border-bottom: 1px solid #e1e1e1;
@@ -143,6 +153,18 @@ main {
   align-items: center;
 }
 
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.categories-list > a {
+  color: #666;
+  font-weight: 400;
+  font-size: 0.9em;
+}
+
 #search-input {
   width: 0;
   padding: 0;
@@ -204,7 +226,7 @@ main {
   gap: 0.5em;
 }
 
-.meta .categories a {
+.meta .categories > a {
   color: #666;
   font-weight: 400;
 }
