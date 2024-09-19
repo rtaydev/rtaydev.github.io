@@ -1,14 +1,12 @@
 ---
 layout: post
 title: "Coming Out as Neurodivergent in Tech: My Journey and Why It’s Time to Change the Narrative"
-date: 2024-10-01
+date: 2024-09-19
 categories: tech neurodiversity
 excerpt: "Sharing my journey of coming out as neurodivergent in the tech industry and why it's crucial to change the narrative around neurodiversity in the workplace."
 author: "Russ Taylor"
 image: /assets/img/neurodiversity-in-tech.jpg
 ---
-
-### Coming Out as Neurodivergent in Tech: My Journey and Why It’s Time to Change the Narrative
 
 I’ll admit it—I spent a lot of time wrestling with whether or not to “come out” as neurodivergent in professional settings. It’s hard enough to confront this part of your identity personally, let alone share it with family, friends, recruiters, or potential employers.
 
@@ -20,7 +18,7 @@ Guess what? You're not alone, and the conversation around neurodivergence in the
 
 As a software engineer, I often found myself balancing two lives: the one where I crushed deadlines, debugged complex issues, and contributed to groundbreaking projects—and the one where I quietly struggled with sensory overload, anxiety, or just plain burnout from masking (pretending to be “neurotypical”).
 
-Coming to terms with my diagnosis of autistic ADHD was both a revelation and a struggle. On one hand, everything made *sense* now: why I’d get hyper-focused on certain coding problems while completely forgetting basic self-care, or why team meetings would leave me drained for hours afterward. On the other hand, the fear of being misunderstood—or worse, labeled as "broken"—was real. 
+Coming to terms with my diagnosis of autistic ADHD was both a revelation and a struggle. On one hand, everything made *sense* now: why I’d get hyper-focused on certain coding problems while completely forgetting basic self-care, or why team meetings would leave me drained for hours afterward. On the other hand, the fear of being misunderstood—or worse, labeled as "broken"—was real.
 
 That fear is reinforced by the subtle (and sometimes not-so-subtle) stigmas society still attaches to neurodivergence. For instance, a [2020 study by Deloitte](https://www2.deloitte.com/uk/en/pages/about-deloitte-uk/articles/neurodiversity-at-work.html) found that many neurodivergent individuals hide their diagnosis at work because they’re worried about being unfairly judged or overlooked for promotions. It’s not just me.
 
@@ -33,7 +31,7 @@ Yet, many companies aren't ready to tap into this talent. The tech industry prid
 #### Tips for Navigating Disclosure
 
 1. **Know Your Value First**: Before sharing your diagnosis, remind yourself of your skills, contributions, and value. Be confident in what you bring to the table.
-   
+
 2. **Choose Your Timing**: You don’t have to disclose in an interview. Many neurodivergent individuals find it helpful to bring it up later—during negotiations, after securing the job, or after building rapport with their team.
 
 3. **Be Clear About Your Needs**: If you’re going to disclose, frame it around how your employer can help you thrive. For example, you might ask for noise-cancelling headphones in an open-plan office or flexible deadlines to accommodate hyper-focus periods.

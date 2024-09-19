@@ -235,6 +235,12 @@ main {
   margin-top: 3em;
 }
 
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+} 
+
 .about-text {
   color: #777;
   font-size: 0.9em;
