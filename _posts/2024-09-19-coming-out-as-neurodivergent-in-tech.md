@@ -5,7 +5,7 @@ date: 2024-10-01
 categories: tech neurodiversity
 excerpt: "Sharing my journey of coming out as neurodivergent in the tech industry and why it's crucial to change the narrative around neurodiversity in the workplace."
 author: "Russ Taylor"
-image: /assets/images/neurodivergent-journey.jpg
+image: /assets/img/neurodiversity-in-tech.jpg
 ---
 
 ### Coming Out as Neurodivergent in Tech: My Journey and Why It’s Time to Change the Narrative
