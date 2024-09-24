@@ -63,7 +63,7 @@ It’s time we flipped the script. Neurodivergence doesn’t have to be a barrie
 
 At the end of the day, it’s all about creating spaces where people feel comfortable being themselves. As someone who’s walked this path, I can say this with confidence: the more we talk openly about neurodivergence, the easier it becomes for others to join the conversation.
 
-If you’re curious about neurodiversity in the workplace, I recommend checking out the **“[ADHD ReWired](https://www.adhdrewired.com/)” podcast**, or reading **“[Divergent Mind](https://www.goodreads.com/book/show/50358235-divergent-mind)” by Jenara Nerenberg**. You can also explore **[this guide](https://embrace-autism.com/neurodiversity-in-the-workplace/)** on autism and work by Embrace Autism.
+If you’re curious about neurodiversity in the workplace, I recommend checking out the **“[ADHD ReWired](https://www.adhdrewired.com/)” podcast**, or reading **“[Divergent Mind](https://www.amazon.co.uk/Divergent-Mind-Jenara-Nerenberg/dp/0062876791)” by Jenara Nerenberg**. You can also explore **[this guide](https://embrace-autism.com/workplace-accommodations-for-autism-and-audhd/)** on autism and work by Embrace Autism.
 
 For the employers out there: By being more inclusive, you're not just doing the “right thing”—you’re creating a richer, more innovative workspace. The future of tech is diverse, and neurodiversity is a big part of that.
 
