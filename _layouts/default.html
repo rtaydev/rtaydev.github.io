@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} - {{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="keywords" content="{{ page.keywords | default: site.keywords }}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/syntax.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-jekyll-search/1.9.0/simple-jekyll-search.min.js"></script>
     {{ site.seo | default: "" | append: "" }}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "{{ site.title }}",
+      "description": "{{ site.description }}",
+      "url": "{{ site.url }}",
+      "author": {
+        "@type": "Person",
+        "name": "Russ Taylor"
+      }
+    }
+    </script>
   </head>
   <body>
     {% include header.html %}

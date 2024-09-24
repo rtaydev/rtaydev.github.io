@@ -6,6 +6,8 @@ categories: tech neurodiversity
 excerpt: "Sharing my journey of coming out as neurodivergent in the tech industry and why it's crucial to change the narrative around neurodiversity in the workplace."
 author: "Russ Taylor"
 image: /assets/img/neurodiversity-in-tech.jpg
+description: "As a neurodivergent developer, I’ve spent years navigating the tech industry while coming to terms with the strengths and challenges that come with being neurodivergent. In this post, I share my journey of coming out as neurodivergent in the workplace and why it’s time to change the narrative around neurodiversity in tech."
+keywords: neurodiversity, tech, neurodivergent, ADHD, autism, workplace, inclusion, diversity, stigma, support, employers, employees, hiring, recruitment, accommodations, strengths, challenges, narrative, change, journey, experience, tips, resources, references
 ---
 
 I’ll admit it—I spent a lot of time wrestling with whether or not to “come out” as neurodivergent in professional settings. It’s hard enough to confront this part of your identity personally, let alone share it with family, friends, recruiters, or potential employers.
