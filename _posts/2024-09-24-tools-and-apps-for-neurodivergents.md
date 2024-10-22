@@ -76,6 +76,6 @@ Got any favourites of your own? Drop them in the comments—I'm always keen to d
 
 I’m a senior React and React Native developer who’s recently embraced my neurodivergent identity. Diagnosed with autistic ADHD, I’ve spent years navigating the tech industry while coming to terms with the strengths and challenges that come with being neurodivergent. Through my blog, I aim to raise awareness about neurodiversity, offer tips and tools for fellow developers, and share insights from my own experience.
 
-If you’re interested in reading more about my journey, check out my blog at [rtaydev.github.io](https://rtaydev.github.io).
+If you’re interested in reading more about my journey, check out my blog at [neurodisruptive.org](https://neurodisruptive.org).
 
 ---

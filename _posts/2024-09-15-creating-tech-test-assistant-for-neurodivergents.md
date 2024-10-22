@@ -410,3 +410,13 @@ The `ScreenshotManager` uses macOS's native `ScreenCaptureKit` to capture screen
 ### GitHub Repository
 
 The full source code for this project is available on GitHub: [GitHub Repository](https://github.com/rtaydev/nd-tech-assistant).
+
+---
+
+### About Me
+
+I’m a senior React and React Native developer who’s recently embraced my neurodivergent identity. Diagnosed with autistic ADHD, I’ve spent years navigating the tech industry while coming to terms with the strengths and challenges that come with being neurodivergent. Through my blog, I aim to raise awareness about neurodiversity, offer tips and tools for fellow developers, and share insights from my own experience.
+
+If you’re interested in reading more about my journey, check out my blog at [neurodisruptive.org](https://neurodisruptive.org).
+
+---

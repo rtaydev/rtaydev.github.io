@@ -40,7 +40,7 @@
       <div class="main-column">
         <div class="post-list">
           {% if page.layout == 'home' %}
-            {% for post in site.posts %}
+            {% for post in site.posts | sort: 'date' %}
               <article>
                 <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
                 {% if post.image %}
